@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from googletrans import Translator
-
-translator = Translator()
+from deep_translator import GoogleTranslator
 
 def get_english_words():
     url = "https://randomword.com/"
@@ -21,10 +19,9 @@ def get_english_words():
         print("Произошла ошибка:", e)
         return None
 
-def translate_text(text, dest='ru'):
+def translate_text(text, target='ru'):
     try:
-        translated = translator.translate(text, dest=dest)
-        return translated.text
+        return GoogleTranslator(source='auto', target=target).translate(text)
     except Exception as e:
         print("Ошибка при переводе:", e)
         return text
